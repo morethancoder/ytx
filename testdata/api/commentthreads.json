@@ -1,0 +1,3 @@
+{"kind":"youtube#commentThreadListResponse","items":[
+ {"kind":"youtube#commentThread","id":"thr1","snippet":{"totalReplyCount":2,"topLevelComment":{"id":"thr1","snippet":{"authorDisplayName":"Ann","textDisplay":"Great video?","likeCount":5,"publishedAt":"2026-11-03T10:00:00Z"}}}},
+ {"kind":"youtube#commentThread","id":"thr2","snippet":{"totalReplyCount":0,"topLevelComment":{"id":"thr2","snippet":{"authorDisplayName":"Bob","textDisplay":"Nice","likeCount":0,"publishedAt":"2026-11-04T10:00:00Z"}}}}]}

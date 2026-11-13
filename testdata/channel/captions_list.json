@@ -1,0 +1,28 @@
+{
+ "items": [
+  {
+   "id": "AUieDaZ1",
+   "snippet": {
+    "videoId": "dQw4w9WgXcQ",
+    "lastUpdated": "2026-01-01T00:00:00Z",
+    "trackKind": "standard",
+    "language": "en",
+    "name": "English",
+    "isDraft": false,
+    "status": "serving"
+   }
+  },
+  {
+   "id": "AUieDaZ2",
+   "snippet": {
+    "videoId": "dQw4w9WgXcQ",
+    "lastUpdated": "2026-01-01T00:00:00Z",
+    "trackKind": "asr",
+    "language": "en",
+    "name": "",
+    "isDraft": false,
+    "status": "serving"
+   }
+  }
+ ]
+}

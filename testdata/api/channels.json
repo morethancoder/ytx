@@ -1,0 +1,5 @@
+{"kind":"youtube#channelListResponse","items":[
+ {"kind":"youtube#channel","id":"UCaaaaaaaaaaaaaaaaaaaaaa",
+  "snippet":{"title":"Chan","description":"about","customUrl":"@chan","thumbnails":{"high":{"url":"https://i/c.jpg","width":800,"height":800}}},
+  "contentDetails":{"relatedPlaylists":{"uploads":"UUaaaaaaaaaaaaaaaaaaaaaa"}},
+  "statistics":{"viewCount":"1000000","subscriberCount":"5000","videoCount":"88"}}]}

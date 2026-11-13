@@ -1,0 +1,13 @@
+{"kind":"youtube#videoListResponse","items":[
+ {"kind":"youtube#video","id":"vidTagged003",
+  "snippet":{"publishedAt":"2026-10-01T12:00:00Z","channelId":"UCaaaaaaaaaaaaaaaaaaaaaa","channelTitle":"Chan","title":"Tagged #shorts","description":"d","tags":["x"],
+   "thumbnails":{"default":{"url":"https://i/d.jpg","width":120,"height":90},"high":{"url":"https://i/h.jpg","width":480,"height":360}},"liveBroadcastContent":"none"},
+  "contentDetails":{"duration":"PT2M30S"},"statistics":{"viewCount":"50"}},
+ {"kind":"youtube#video","id":"vidShort0002",
+  "snippet":{"publishedAt":"2026-10-20T12:00:00Z","channelId":"UCaaaaaaaaaaaaaaaaaaaaaa","channelTitle":"Chan","title":"Short one","thumbnails":{},"liveBroadcastContent":"none"},
+  "contentDetails":{"duration":"PT45S"},"statistics":{"viewCount":"9000","likeCount":"12","commentCount":"3"}},
+ {"kind":"youtube#video","id":"vidLong00001",
+  "snippet":{"publishedAt":"2026-11-02T12:00:00Z","channelId":"UCaaaaaaaaaaaaaaaaaaaaaa","channelTitle":"Chan","title":"Long one","description":"long desc","tags":["a","b"],
+   "thumbnails":{"maxres":{"url":"https://i/m.jpg","width":1280,"height":720},"high":{"url":"https://i/h.jpg","width":480,"height":360}},"liveBroadcastContent":"none"},
+  "contentDetails":{"duration":"PT1H2M3S"},"statistics":{"viewCount":"123456","likeCount":"700","commentCount":"40"}}
+]}

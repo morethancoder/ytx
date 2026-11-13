@@ -1,0 +1,3 @@
+{"kind":"youtube#searchListResponse","pageInfo":{"totalResults":1000,"resultsPerPage":1},
+ "items":[
+  {"kind":"youtube#searchResult","id":{"kind":"youtube#video","videoId":"vidTagged003"},"snippet":{"title":"Tagged"}}]}

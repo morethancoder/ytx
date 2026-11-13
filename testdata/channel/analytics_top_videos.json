@@ -1,0 +1,74 @@
+{
+ "kind": "youtubeAnalytics#resultTable",
+ "columnHeaders": [
+  {
+   "name": "video",
+   "columnType": "DIMENSION",
+   "dataType": "STRING"
+  },
+  {
+   "name": "views",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "estimatedMinutesWatched",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "averageViewDuration",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "averageViewPercentage",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  }
+ ],
+ "rows": [
+  [
+   "vid00000001",
+   90000,
+   250000,
+   167,
+   66.8
+  ],
+  [
+   "vid00000003",
+   45000,
+   140000,
+   187,
+   51.9
+  ],
+  [
+   "vid00000005",
+   30000,
+   48000,
+   96,
+   87.3
+  ],
+  [
+   "vid00000002",
+   12000,
+   70000,
+   350,
+   32.2
+  ],
+  [
+   "vid00000004",
+   3000,
+   21000,
+   420,
+   19.8
+  ],
+  [
+   "vid00000006",
+   1500,
+   9000,
+   360,
+   27.3
+  ]
+ ]
+}

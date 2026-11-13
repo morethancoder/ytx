@@ -1,0 +1,62 @@
+{
+ "kind": "youtube#playlistItemListResponse",
+ "items": [
+  {
+   "id": "UExpdGVtMDAx",
+   "snippet": {
+    "title": "How I edit videos fast"
+   },
+   "contentDetails": {
+    "videoId": "vid00000001"
+   }
+  },
+  {
+   "id": "UExpdGVtMDAx",
+   "snippet": {
+    "title": "My full studio tour"
+   },
+   "contentDetails": {
+    "videoId": "vid00000002"
+   }
+  },
+  {
+   "id": "UExpdGVtMDAx",
+   "snippet": {
+    "title": "Three lighting mistakes"
+   },
+   "contentDetails": {
+    "videoId": "vid00000003"
+   }
+  },
+  {
+   "id": "UExpdGVtMDAx",
+   "snippet": {
+    "title": "A long talk about cameras and lenses"
+   },
+   "contentDetails": {
+    "videoId": "vid00000004"
+   }
+  },
+  {
+   "id": "UExpdGVtMDAx",
+   "snippet": {
+    "title": "Quick tip: audio"
+   },
+   "contentDetails": {
+    "videoId": "vid00000005"
+   }
+  },
+  {
+   "id": "UExpdGVtMDAx",
+   "snippet": {
+    "title": "Vlog: a week of shooting"
+   },
+   "contentDetails": {
+    "videoId": "vid00000006"
+   }
+  }
+ ],
+ "pageInfo": {
+  "totalResults": 6
+ }
+}

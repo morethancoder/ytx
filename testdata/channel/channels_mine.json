@@ -1,0 +1,17 @@
+{
+ "kind": "youtube#channelListResponse",
+ "items": [
+  {
+   "id": "UCabcdefghijklmnopqrstuv",
+   "snippet": {
+    "title": "Test Channel"
+   },
+   "contentDetails": {
+    "relatedPlaylists": {
+     "likes": "",
+     "uploads": "UUabcdefghijklmnopqrstuv"
+    }
+   }
+  }
+ ]
+}

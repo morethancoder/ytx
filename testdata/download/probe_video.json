@@ -1,0 +1,261 @@
+{
+ "_type": "video",
+ "id": "jNQXAC9IVRw",
+ "title": "Me at the zoo",
+ "uploader": "jawed",
+ "channel": "jawed",
+ "extractor": "youtube",
+ "extractor_key": "Youtube",
+ "webpage_url": "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+ "duration": 19,
+ "upload_date": "20050424",
+ "live_status": "not_live",
+ "is_live": false,
+ "width": 320,
+ "height": 240,
+ "thumbnail": "https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg?sqp=-oaymwEmCOADEOgC8quKqQMa8AEB-AG-AoAC8AGKAgwIABABGFUgWShlMA8=&rs=AOn4CLA9eLBatYv9WbkD4BbZ2Im-biSPTw",
+ "description": "Microplastics are accumulating in human brains at an alarming rate\nhttps://www.youtube.com/watch?v=0PT5c1z3LL8\n\n“Nanoplastics and Human Health” with Matthew J Campen, PhD, MSPH\nhttps://www.youtube.com/watch?v=RRBN_4L09Mg\n\n00:00 Intro\n00:05 The cool thing\n00:17 End",
+ "thumbnails": [
+  {
+   "url": "https://i.ytimg.com/vi/jNQXAC9IVRw/sddefault.jpg"
+  },
+  {
+   "url": "https://i.ytimg.com/vi_webp/jNQXAC9IVRw/sddefault.webp"
+  },
+  {
+   "url": "https://i.ytimg.com/vi/jNQXAC9IVRw/hq720.jpg"
+  },
+  {
+   "url": "https://i.ytimg.com/vi_webp/jNQXAC9IVRw/hq720.webp"
+  },
+  {
+   "url": "https://i.ytimg.com/vi/jNQXAC9IVRw/maxresdefault.jpg"
+  },
+  {
+   "url": "https://i.ytimg.com/vi_webp/jNQXAC9IVRw/maxresdefault.webp"
+  }
+ ],
+ "formats": [
+  {
+   "format_id": "233",
+   "ext": "mp4",
+   "vcodec": "none",
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "234",
+   "ext": "mp4",
+   "vcodec": "none",
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "139-drc",
+   "ext": "m4a",
+   "vcodec": "none",
+   "acodec": "mp4a.40.5",
+   "abr": 49.127,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "249-drc",
+   "ext": "webm",
+   "vcodec": "none",
+   "acodec": "opus",
+   "abr": 50.012,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "250-drc",
+   "ext": "webm",
+   "vcodec": "none",
+   "acodec": "opus",
+   "abr": 63.755,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "139",
+   "ext": "m4a",
+   "vcodec": "none",
+   "acodec": "mp4a.40.5",
+   "abr": 49.14,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "249",
+   "ext": "webm",
+   "vcodec": "none",
+   "acodec": "opus",
+   "abr": 47.356,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "250",
+   "ext": "webm",
+   "vcodec": "none",
+   "acodec": "opus",
+   "abr": 60.478,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "140-drc",
+   "ext": "m4a",
+   "vcodec": "none",
+   "acodec": "mp4a.40.2",
+   "abr": 129.757,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "251-drc",
+   "ext": "webm",
+   "vcodec": "none",
+   "acodec": "opus",
+   "abr": 107.429,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "140",
+   "ext": "m4a",
+   "vcodec": "none",
+   "acodec": "mp4a.40.2",
+   "abr": 129.796,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "251",
+   "ext": "webm",
+   "vcodec": "none",
+   "acodec": "opus",
+   "abr": 106.064,
+   "resolution": "audio only"
+  },
+  {
+   "format_id": "269",
+   "ext": "mp4",
+   "vcodec": "avc1.4D400B",
+   "acodec": "none",
+   "width": 192,
+   "height": 144,
+   "abr": 0,
+   "resolution": "192x144"
+  },
+  {
+   "format_id": "160",
+   "ext": "mp4",
+   "vcodec": "avc1.4D400B",
+   "acodec": "none",
+   "width": 192,
+   "height": 144,
+   "abr": 0,
+   "resolution": "192x144"
+  },
+  {
+   "format_id": "602",
+   "ext": "mp4",
+   "vcodec": "vp09.00.10.08",
+   "acodec": "none",
+   "width": 192,
+   "height": 144,
+   "abr": 0,
+   "resolution": "192x144"
+  },
+  {
+   "format_id": "603",
+   "ext": "mp4",
+   "vcodec": "vp09.00.11.08.01.05.01.06.00",
+   "acodec": "none",
+   "width": 192,
+   "height": 144,
+   "abr": 0,
+   "resolution": "192x144"
+  },
+  {
+   "format_id": "278",
+   "ext": "webm",
+   "vcodec": "vp9",
+   "acodec": "none",
+   "width": 192,
+   "height": 144,
+   "abr": 0,
+   "resolution": "192x144"
+  },
+  {
+   "format_id": "229",
+   "ext": "mp4",
+   "vcodec": "avc1.4D400C",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "230",
+   "ext": "mp4",
+   "vcodec": "avc1.4D400C",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "134",
+   "ext": "mp4",
+   "vcodec": "avc1.4D400C",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "133",
+   "ext": "mp4",
+   "vcodec": "avc1.4D400C",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "18",
+   "ext": "mp4",
+   "vcodec": "avc1.42001E",
+   "acodec": "mp4a.40.2",
+   "width": 320,
+   "height": 240,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "604",
+   "ext": "mp4",
+   "vcodec": "vp09.00.20.08.01.05.01.06.00",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "242",
+   "ext": "webm",
+   "vcodec": "vp9",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  },
+  {
+   "format_id": "395",
+   "ext": "mp4",
+   "vcodec": "av01.0.00M.08.0.110.05.01.06.0",
+   "acodec": "none",
+   "width": 320,
+   "height": 240,
+   "abr": 0,
+   "resolution": "320x240"
+  }
+ ]
+}

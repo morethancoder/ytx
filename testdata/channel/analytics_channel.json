@@ -1,0 +1,39 @@
+{
+ "kind": "youtubeAnalytics#resultTable",
+ "columnHeaders": [
+  {
+   "name": "views",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "estimatedMinutesWatched",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "averageViewDuration",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "subscribersGained",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  },
+  {
+   "name": "subscribersLost",
+   "columnType": "METRIC",
+   "dataType": "FLOAT"
+  }
+ ],
+ "rows": [
+  [
+   181500,
+   538000,
+   178,
+   1240,
+   95
+  ]
+ ]
+}

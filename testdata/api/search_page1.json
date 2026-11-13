@@ -1,0 +1,4 @@
+{"kind":"youtube#searchListResponse","nextPageToken":"PAGE2","pageInfo":{"totalResults":1000,"resultsPerPage":2},
+ "items":[
+  {"kind":"youtube#searchResult","id":{"kind":"youtube#video","videoId":"vidLong00001"},"snippet":{"title":"Long one"}},
+  {"kind":"youtube#searchResult","id":{"kind":"youtube#video","videoId":"vidShort0002"},"snippet":{"title":"Short one"}}]}

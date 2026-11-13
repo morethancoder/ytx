@@ -1,0 +1,125 @@
+[
+ {
+  "id": "lat1",
+  "url": "https://www.youtube.com/watch?v=lat1",
+  "title": "Latte art for beginners, in 5 steps",
+  "channel_id": "UCbean",
+  "channel_name": "Bean Theory",
+  "views": 1250000,
+  "duration_s": 847,
+  "thumbnail": "{{BASE}}/thumb/lat1.jpg",
+  "published": "2024-11-01T00:00:00Z"
+ },
+ {
+  "id": "short1",
+  "url": "https://www.youtube.com/watch?v=short1",
+  "title": "Quick latte #shorts",
+  "channel_id": "UCshort",
+  "channel_name": "Shorty",
+  "views": 5000000,
+  "duration_s": 30,
+  "thumbnail": "{{BASE}}/thumb/short1.jpg",
+  "published": "2026-11-01T00:00:00Z",
+  "is_short": true
+ },
+ {
+  "id": "live1",
+  "url": "https://www.youtube.com/watch?v=live1",
+  "title": "Coffee live stream 24/7",
+  "channel_id": "UClive",
+  "channel_name": "Live Beans",
+  "views": 300,
+  "duration_s": 0,
+  "thumbnail": "{{BASE}}/thumb/live1.jpg",
+  "published_text": "Streamed 2 days ago",
+  "is_live": true
+ },
+ {
+  "id": "own1",
+  "url": "https://www.youtube.com/watch?v=own1",
+  "title": "My own coffee video",
+  "channel_id": "UCown",
+  "channel_name": "Me",
+  "views": 42,
+  "duration_s": 500,
+  "thumbnail": "{{BASE}}/thumb/own1.jpg",
+  "published": "2026-10-01T00:00:00Z"
+ },
+ {
+  "id": "ar1",
+  "url": "https://www.youtube.com/watch?v=ar1",
+  "title": "كيكة الهيل والفستق بدون فرن",
+  "channel_id": "UCsalma",
+  "channel_name": "مطبخ سلمى",
+  "views": 999,
+  "duration_s": 3723,
+  "thumbnail": "{{BASE}}/thumb/ar1.jpg",
+  "published_text": "3 weeks ago"
+ },
+ {
+  "id": "c6",
+  "url": "https://www.youtube.com/watch?v=c6",
+  "title": "Why your coffee tastes bitter",
+  "channel_id": "UCgrind",
+  "channel_name": "Daily Grind",
+  "views": 1,
+  "duration_s": 495,
+  "thumbnail": "{{BASE}}/thumb/c6.jpg",
+  "published": "2026-11-11T08:00:00Z"
+ },
+ {
+  "id": "c7",
+  "url": "https://www.youtube.com/watch?v=c7",
+  "title": "I made cafe coffee at home for a month",
+  "channel_id": "UCslow",
+  "channel_name": "Slow Mornings",
+  "views": 18000,
+  "duration_s": 702,
+  "thumbnail": "{{BASE}}/thumb/c7.jpg",
+  "published": "2026-11-09T12:00:00Z"
+ },
+ {
+  "id": "c8",
+  "url": "https://www.youtube.com/watch?v=c8",
+  "title": "A slow Sunday morning routine",
+  "channel_id": "UCnoavatar",
+  "channel_name": "Anna Linden",
+  "views": 610000,
+  "duration_s": 1371,
+  "thumbnail": "{{BASE}}/thumb/c8.jpg",
+  "published": "2026-06-01T00:00:00Z"
+ },
+ {
+  "id": "c9",
+  "url": "https://www.youtube.com/watch?v=c9",
+  "title": "Espresso machines compared",
+  "channel_id": "UCgear",
+  "channel_name": "Gear Lab",
+  "views": 2400000,
+  "duration_s": 1100,
+  "thumbnail": "{{BASE}}/thumb/c9.jpg",
+  "published": "2025-01-01T00:00:00Z"
+ },
+ {
+  "id": "up1",
+  "url": "https://www.youtube.com/watch?v=up1",
+  "title": "Premiere: new roast",
+  "channel_id": "UCroast",
+  "channel_name": "Roasters",
+  "views": 0,
+  "duration_s": 0,
+  "thumbnail": "{{BASE}}/thumb/up1.jpg",
+  "published_text": "Premieres in 2 hours"
+ },
+ {
+  "id": "c10",
+  "url": "https://www.youtube.com/watch?v=c10",
+  "title": "Cold brew guide",
+  "channel_id": "UCbrew",
+  "channel_name": "Brewers",
+  "views": 77,
+  "duration_s": 300,
+  "thumbnail": "{{BASE}}/thumb/c10.jpg",
+  "published": "2026-11-12T11:59:40Z"
+ }
+]
