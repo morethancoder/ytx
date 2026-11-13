@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
@@ -205,6 +206,15 @@ func HTTPClient(ctx context.Context) (*http.Client, error) {
 
 // ---- login
 
+// defaultClientPath is where `ytx login` looks for the OAuth client when none is stored or
+// passed: ytx home, outside any repo, so the client secret can't be committed by accident.
+func defaultClientPath() string { return filepath.Join(config.Home(), "client_secret.json") }
+
+func fileExists(p string) bool {
+	st, err := os.Stat(p)
+	return err == nil && st.Mode().IsRegular()
+}
+
 func login(ctx context.Context, in ops.Input) (*ops.Result, error) {
 	if err := storeReady(); err != nil {
 		return nil, err
@@ -221,11 +231,19 @@ func login(ctx context.Context, in ops.Input) (*ops.Result, error) {
 		if err != nil {
 			return nil, apperr.Wrap(apperr.Internal, err, "couldn't read the OAuth client from the Keychain")
 		}
-		if s == "" {
-			return nil, apperr.New(apperr.InvalidInput, "no OAuth client stored yet: pass --client client_secret.json "+
-				"(Google Cloud console > APIs & Services > Credentials > Create credentials > OAuth client ID > Desktop app)")
+		switch {
+		case s != "":
+			raw = []byte(s)
+		case fileExists(defaultClientPath()):
+			b, err := readLimited(defaultClientPath(), 64<<10, "OAuth client file")
+			if err != nil {
+				return nil, err
+			}
+			raw = b
+		default:
+			return nil, apperr.New(apperr.InvalidInput, "no OAuth client stored yet: save it as %s or pass --client client_secret.json "+
+				"(Google Cloud console > APIs & Services > Credentials > Create credentials > OAuth client ID > Desktop app)", defaultClientPath())
 		}
-		raw = []byte(s)
 	}
 	ci, err := parseClient(raw)
 	if err != nil {

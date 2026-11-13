@@ -92,7 +92,7 @@ create`, `playlist add`, `playlist remove`, `comment post`, `comment reply`,
 
 What to do:
 
-- `login_required`: tell the user to run `ytx login --client client_secret.json`
+- `login_required`: tell the user to save the OAuth client JSON as `~/.ytx/client_secret.json` and run `ytx login` (or `ytx login --client <file>`)
   (first time) or `ytx login`. You cannot sign in for them. Do not work around it.
 - `needs_api_key`: tell the user to set `YOUTUBE_API_KEY` or run
   `printf %s "$KEY" | ytx key set`. Do not ask them to paste the key into the chat.

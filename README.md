@@ -51,7 +51,9 @@ To make the OAuth client in Google Cloud:
 3. Set up the OAuth consent screen and add your Google account as a test user.
 4. Under Credentials, create an OAuth client ID and choose the application type
    Desktop app.
-5. Download the JSON and pass it once with `ytx login --client`.
+5. Download the JSON and save it as `~/.ytx/client_secret.json` (ytx home, outside any repo), then run
+   `ytx login`. Or pass it once with `ytx login --client <file>`. Either way the client and the token
+   then live in the macOS Keychain.
 
 ## Commands
 

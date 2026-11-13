@@ -8,6 +8,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 	"sync"
 	"testing"
@@ -262,5 +263,24 @@ func TestLogout(t *testing.T) {
 	res, err = logout(context.Background(), input("auth.logout", false, nil))
 	if err != nil || len(res.Warnings) != 1 || f.ms.m[config.SecretOAuthToken] != "" {
 		t.Fatalf("revoke failure: err %v warnings %v", err, res.Warnings)
+	}
+}
+
+// With no client stored or passed, login reads ytx home's client_secret.json and gets as far
+// as the browser step (the wrong-state browser makes it time out there).
+func TestLoginReadsClientFromHome(t *testing.T) {
+	setup(t)
+	br := &fakeBrowser{t: t, good: false}
+	openBrowser = br.open
+	loginWait = 400 * time.Millisecond
+	if _, err := login(context.Background(), input("auth.login", false, nil)); codeOf(err) != apperr.InvalidInput ||
+		!strings.Contains(err.Error(), defaultClientPath()) {
+		t.Fatalf("no client anywhere: want invalid_input naming %s, got %v", defaultClientPath(), err)
+	}
+	if err := os.WriteFile(defaultClientPath(), fixture(t, "client_installed.json"), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := login(context.Background(), input("auth.login", false, nil)); codeOf(err) != apperr.Timeout {
+		t.Fatalf("client in home: want timeout at the browser step, got %v", err)
 	}
 }
