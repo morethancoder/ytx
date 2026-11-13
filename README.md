@@ -11,6 +11,7 @@ It works in three modes, and each one adds to the last.
 Needs Go to build. `yt-dlp` and `ffmpeg` are only needed for `ytx download`.
 
 ```bash
+go install github.com/morethancoder/ytx/cmd/ytx@latest   # or, from a clone:
 make install     # go install ytx into GOBIN
 make build       # or build ./ytx in this folder (VERSION=v1.2.3 stamps a version)
 make doctor      # checks go, yt-dlp and ffmpeg, then runs `ytx doctor`
@@ -204,3 +205,7 @@ make clean
 
 `internal/ops/list.go` is the single source of truth for every command. See
 `CLAUDE.md` for the code layout and rules.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
