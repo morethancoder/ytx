@@ -140,7 +140,8 @@ func channelGet(ctx context.Context, in ops.Input) (*ops.Result, error) {
 		return nil, err
 	}
 	FillAge(c.Recent)
-	c.MedianViews = analyze.Median(c.Recent)
+	med, ok := analyze.SettledMedian(c.Recent, time.Now())
+	c.MedianViews, c.TooNew = med, !ok
 	for i := range c.Recent {
 		c.Recent[i].Outlier = analyze.Outlier(c.Recent[i].Views, c.MedianViews)
 	}

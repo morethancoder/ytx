@@ -78,8 +78,8 @@ func TestScoreOutliers(t *testing.T) {
 	live := vid("live", "A", 5000)
 	live.IsLive = true
 	f := &fake{channels: map[string]*model.Channel{
-		"A": {ID: "A", Name: "Chan A", URL: "https://www.youtube.com/channel/A", Subscribers: 1000, Recent: recent(100, 200, 300)},       // odd: 200
-		"B": {ID: "B", Name: "Chan B", URL: "https://www.youtube.com/channel/B", Subscribers: 50, Recent: recent(100, 200, 300, 400, 0)}, // even, zero skipped: 250
+		"A": {ID: "A", Name: "Chan A", URL: "https://www.youtube.com/channel/A", Subscribers: 1000, Recent: recent(100, 150, 200, 250, 300)},  // odd: 200
+		"B": {ID: "B", Name: "Chan B", URL: "https://www.youtube.com/channel/B", Subscribers: 50, Recent: recent(100, 200, 250, 300, 400, 0)}, // even, zero skipped: 250
 	}}
 	vs := []model.Video{vid("a1", "A", 600), vid("b1", "B", 500), vid("zero", "A", 0), live, vid("c1", "C", 900)}
 	rows, chans, warns := ScoreOutliers(context.Background(), f, vs, 30)
@@ -114,7 +114,7 @@ func TestScoreOutliersConcurrencyCap(t *testing.T) {
 	f := &fake{channels: map[string]*model.Channel{}}
 	var vs []model.Video
 	for _, id := range []string{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"} {
-		f.channels[id] = &model.Channel{ID: id, Recent: recent(10)}
+		f.channels[id] = &model.Channel{ID: id, Recent: recent(10, 10, 10, 10, 10)}
 		vs = append(vs, vid("v"+id, id, 10))
 	}
 	ScoreOutliers(context.Background(), f, vs, 5)
@@ -176,8 +176,8 @@ func noteFixture() *fake {
 	f := gapFixture()
 	f.videos[0].Published = time.Now().AddDate(0, 0, -40)
 	f.channels = map[string]*model.Channel{
-		"A": {ID: "A", Name: "Chan A", URL: "https://www.youtube.com/channel/A", Subscribers: 12500, Recent: recent(100, 200, 300)},
-		"B": {ID: "B", Name: "Chan | B", URL: "https://www.youtube.com/channel/B", Subscribers: 1_200_000, Recent: recent(500, 1000, 1500)},
+		"A": {ID: "A", Name: "Chan A", URL: "https://www.youtube.com/channel/A", Subscribers: 12500, Recent: recent(100, 150, 200, 250, 300)},
+		"B": {ID: "B", Name: "Chan | B", URL: "https://www.youtube.com/channel/B", Subscribers: 1_200_000, Recent: recent(500, 750, 1000, 1250, 1500)},
 	}
 	f.suggest = map[string][]string{
 		"claude code":     {"claude code tutorial", "claude code install"},
@@ -343,5 +343,44 @@ func TestGatherParallelTrace(t *testing.T) {
 	}
 	if tr.Source() != "keyless" {
 		t.Fatalf("source = %q", tr.Source())
+	}
+}
+
+// aged makes uploads published `days` ago with the given views.
+func aged(days int, views ...int64) []model.Video {
+	var vs []model.Video
+	for _, v := range views {
+		vs = append(vs, model.Video{Views: v, Published: time.Now().Add(-time.Duration(days) * 24 * time.Hour)})
+	}
+	return vs
+}
+
+func TestScoreOutliersAllNew(t *testing.T) {
+	f := &fake{channels: map[string]*model.Channel{
+		"N": {ID: "N", Name: "Fresh Talks", Subscribers: 9, URL: "https://www.youtube.com/channel/N", Recent: aged(0, 100, 150, 152, 160, 170, 180)},
+	}}
+	rows, chans, warns := ScoreOutliers(context.Background(), f, []model.Video{vid("n1", "N", 1_000_000)}, 30)
+	if len(rows) != 1 || rows[0].Outlier != 0 || !rows[0].TooNew || rows[0].ChannelMedian != 0 {
+		t.Fatalf("rows = %+v", rows)
+	}
+	if len(chans) != 1 || !chans[0].TooNew || chans[0].Median != 0 {
+		t.Fatalf("chans = %+v", chans)
+	}
+	if len(warns) != 1 || !strings.Contains(warns[0], "Fresh Talks") || !strings.Contains(warns[0], "too new") {
+		t.Fatalf("warnings = %v", warns)
+	}
+	n := Note{Videos: rows, Channels: chans}
+	out := n.Markdown()
+	if !strings.Contains(out, "| n/a |") || !strings.Contains(out, "too new") || strings.Contains(out, "x |") {
+		t.Fatalf("note lacks n/a or too new:\n%s", out)
+	}
+}
+
+func TestScoreOutliersMixedAges(t *testing.T) {
+	recent := append(aged(0, 1, 2, 3, 4), aged(20, 100, 200, 300, 400, 500)...)
+	f := &fake{channels: map[string]*model.Channel{"M": {ID: "M", Name: "Mixed", Recent: recent}}}
+	rows, _, warns := ScoreOutliers(context.Background(), f, []model.Video{vid("m1", "M", 900)}, 30)
+	if len(warns) != 0 || rows[0].TooNew || rows[0].ChannelMedian != 300 || rows[0].Outlier != 3 {
+		t.Fatalf("rows = %+v warns = %v", rows, warns)
 	}
 }

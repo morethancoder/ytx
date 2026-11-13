@@ -44,6 +44,8 @@ type Channel struct {
 	Recent []Video `json:"recent,omitempty"`
 	// MedianViews is the median of Recent's views, the base for outlier scores.
 	MedianViews int64 `json:"median_views,omitempty"`
+	// TooNew is true when too few of Recent are old enough to judge, so there is no median.
+	TooNew bool `json:"too_new,omitempty"`
 }
 
 // Comment is one top-level comment or reply.

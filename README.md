@@ -64,13 +64,13 @@ Run `ytx schema` for the full list with every argument. Commands marked
 | --- | --- | --- |
 | Reading | `ytx search <query>` | Search videos (flags: `--limit`, `--type`, `--order`, `--since`, `--lang`, `--region`) |
 | | `ytx video <video>` | One video's details |
-| | `ytx channel <channel>` | A channel and recent uploads, with their median views (`--shorts`) |
+| | `ytx channel <channel>` | A channel and recent uploads, with their median views (`--shorts`). The median counts only uploads at least 7 days old, and needs 5 of them; a channel with fewer is marked `too_new` and has no median |
 | | `ytx comments <video>` | Comments, most liked first, questions marked (`--questions`, `--order`) |
 | | `ytx transcript <video>` | The transcript (`--lang`, `--text`) |
 | | `ytx suggest <query>` | Autocomplete, a demand signal (`--expand`) |
 | | `ytx trending` | What is trending in a region (`--region`, `--category`) |
 | | `ytx playlist <playlist>` | A playlist and its videos |
-| Research | `ytx outliers <query>` | Videos ranked by views divided by their channel's median |
+| Research | `ytx outliers <query>` | Videos ranked by views divided by their channel's median (only uploads 7 or more days old count; a channel with fewer than 5 such uploads gets no score and a warning) |
 | | `ytx gaps <query>` | Questions viewers ask that the top transcripts don't answer |
 | | `ytx research <query>` | One Markdown note combining the above (`--out`, `--top`, `--name`) |
 | Packaging | `ytx feedcheck <topic> --thumb a.png --title "..."` | Your thumbnail and title among the top five competitors, as review sheets (see below) |

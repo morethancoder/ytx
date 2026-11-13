@@ -183,6 +183,21 @@ func videoURL(v model.Video) string {
 	return "https://www.youtube.com/watch?v=" + v.ID
 }
 
+// oscoreRow is n/a for a video whose channel is too new to judge, else its score.
+func oscoreRow(v OutlierRow) string {
+	if v.TooNew {
+		return "n/a"
+	}
+	return oscore(v.Outlier)
+}
+
+func medianCell(c ChannelRow) string {
+	if c.TooNew {
+		return "too new"
+	}
+	return num(c.Median)
+}
+
 func oscore(o float64) string {
 	if o <= 0 {
 		return "n/a"
@@ -271,7 +286,7 @@ func (n *Note) Markdown() string {
 	} else {
 		w("| Title | Channel | Views | Age | Length | Outlier |\n|---|---|---|---|---|---|\n")
 		for _, v := range n.Videos[:min(len(n.Videos), maxTop)] {
-			w("| %s | %s | %s | %s | %s | %s |\n", link(v.Title, videoURL(v.Video)), cell(v.ChannelName), num(v.Views), age(v.Video), length(v.DurationS), oscore(v.Outlier))
+			w("| %s | %s | %s | %s | %s | %s |\n", link(v.Title, videoURL(v.Video)), cell(v.ChannelName), num(v.Views), age(v.Video), length(v.DurationS), oscoreRow(v))
 		}
 		w("\n")
 	}
@@ -291,7 +306,7 @@ func (n *Note) Markdown() string {
 	} else {
 		w("| Channel | Subscribers | Median views |\n|---|---|---|\n")
 		for _, c := range n.Channels[:min(len(n.Channels), maxChannels)] {
-			w("| %s | %s | %s |\n", link(c.Name, c.URL), num(c.Subscribers), num(c.Median))
+			w("| %s | %s | %s |\n", link(c.Name, c.URL), num(c.Subscribers), medianCell(c))
 		}
 		w("\n")
 	}

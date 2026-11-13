@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/morethancoder/ytx/internal/model"
@@ -29,6 +30,35 @@ func Median(vs []model.Video) int64 {
 		return xs[m]
 	}
 	return (xs[m-1] + xs[m]) / 2
+}
+
+// SettleDays is how old an upload must be before its views count toward a channel's
+// median. Fresh uploads have barely started collecting views, so they drag it down.
+const SettleDays = 7
+
+// MinSettled is the fewest settled uploads a channel needs to get a median at all.
+const MinSettled = 5
+
+// SettledMedian is the median of the uploads at least SettleDays old at `now`.
+// An upload with no Published date counts as old. ok is false when fewer than
+// MinSettled usable uploads (views above 0, not live) remain; the median is 0 then.
+func SettledMedian(vs []model.Video, now time.Time) (median int64, ok bool) {
+	cutoff := now.Add(-SettleDays * 24 * time.Hour)
+	var old []model.Video
+	n := 0
+	for _, v := range vs {
+		if !v.Published.IsZero() && v.Published.After(cutoff) {
+			continue
+		}
+		old = append(old, v)
+		if v.Views > 0 && !v.IsLive {
+			n++
+		}
+	}
+	if n < MinSettled {
+		return 0, false
+	}
+	return Median(old), true
 }
 
 // Outlier is views ÷ median, rounded to 2 decimals (0 when the median is unknown).

@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/morethancoder/ytx/internal/analyze"
 	"github.com/morethancoder/ytx/internal/apperr"
@@ -33,6 +34,8 @@ type OutlierRow struct {
 	model.Video
 	ChannelMedian      int64 `json:"channel_median"`
 	ChannelSubscribers int64 `json:"channel_subscribers"`
+	// TooNew marks "no score": the channel's recent uploads are too new to judge.
+	TooNew bool `json:"too_new,omitempty"`
 }
 
 // ChannelRow is one channel met in the results.
@@ -42,6 +45,7 @@ type ChannelRow struct {
 	URL         string `json:"url"`
 	Subscribers int64  `json:"subscribers"`
 	Median      int64  `json:"median_views"`
+	TooNew      bool   `json:"too_new,omitempty"`
 }
 
 // forEach runs f for 0..n-1, at most `concurrency` at a time.
@@ -61,7 +65,9 @@ func forEach(n int, f func(i int)) {
 }
 
 // ScoreOutliers scores videos against their channels' medians. Zero-view and
-// live videos are skipped (they have no honest score yet). A channel that
+// live videos are skipped (they have no honest score yet). Only uploads at least
+// analyze.SettleDays old set the median; a channel with too few gets none, its
+// videos are marked TooNew and one warning names it. A channel that
 // can't be read keeps its videos with outlier 0 and adds a warning.
 func ScoreOutliers(ctx context.Context, r yt.Reader, vs []model.Video, recent int) ([]OutlierRow, []ChannelRow, []string) {
 	var ids []string
@@ -86,8 +92,11 @@ func ScoreOutliers(ctx context.Context, r yt.Reader, vs []model.Video, recent in
 			continue
 		}
 		c := chans[i]
-		med := analyze.Median(c.Recent)
-		channels = append(channels, ChannelRow{ID: id, Name: c.Name, URL: c.URL, Subscribers: c.Subscribers, Median: med})
+		med, ok := analyze.SettledMedian(c.Recent, time.Now())
+		if !ok {
+			warnings = append(warnings, "channel "+nameOr(c.Name, id)+": recent uploads are too new to judge, so its videos have no outlier score")
+		}
+		channels = append(channels, ChannelRow{ID: id, Name: c.Name, URL: c.URL, Subscribers: c.Subscribers, Median: med, TooNew: !ok})
 	}
 	// Point into the slice only once it has stopped growing.
 	for i := range channels {
@@ -101,6 +110,7 @@ func ScoreOutliers(ctx context.Context, r yt.Reader, vs []model.Video, recent in
 		row := OutlierRow{Video: v}
 		if c := byID[v.ChannelID]; c != nil {
 			row.ChannelMedian, row.ChannelSubscribers = c.Median, c.Subscribers
+			row.TooNew = c.TooNew
 			row.Outlier = analyze.Outlier(v.Views, c.Median)
 		} else {
 			row.Outlier = 0
@@ -114,6 +124,13 @@ func ScoreOutliers(ctx context.Context, r yt.Reader, vs []model.Video, recent in
 		return rows[i].Views > rows[j].Views
 	})
 	return rows, channels, warnings
+}
+
+func nameOr(name, id string) string {
+	if name == "" {
+		return id
+	}
+	return name
 }
 
 func errString(err error) string {

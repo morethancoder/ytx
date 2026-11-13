@@ -32,7 +32,9 @@ to leave this file out of that output.
   `---`, and without the `=` the shell passes it as a flag and it fails.
 - Is there demand? `ytx suggest "<phrase>" --expand` for autocomplete.
   `ytx outliers "<topic>"` for videos that beat their channel's median, which
-  shows what the audience wants. `ytx gaps "<topic>"` for questions viewers ask
+  shows what the audience wants. The median uses only uploads at least 7 days old.
+  A channel with fewer than 5 of those has no score (`too_new`, shown as "n/a")
+  and a warning names it; do not read that as a weak video. `ytx gaps "<topic>"` for questions viewers ask
   that the top videos don't answer.
 - What do the top videos say? `ytx search`, then `ytx transcript <video> --text`
   and `ytx comments <video> --questions`.

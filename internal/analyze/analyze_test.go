@@ -3,6 +3,7 @@ package analyze
 import (
 	"reflect"
 	"testing"
+	"time"
 
 	"github.com/morethancoder/ytx/internal/model"
 )
@@ -46,5 +47,18 @@ func TestTermsArabic(t *testing.T) {
 	got := Terms("كيف أتعلم البرمجة")
 	if len(got) == 0 {
 		t.Fatal("arabic terms dropped")
+	}
+}
+
+func TestSettledMedian(t *testing.T) {
+	now := time.Now()
+	old := func(v int64) model.Video { return model.Video{Views: v, Published: now.Add(-10 * 24 * time.Hour)} }
+	fresh := func(v int64) model.Video { return model.Video{Views: v, Published: now.Add(-time.Hour)} }
+	vs := []model.Video{fresh(1), old(10), old(20), {Views: 30}, old(40), old(50)}
+	if m, ok := SettledMedian(vs, now); !ok || m != 30 {
+		t.Fatalf("got %d %v", m, ok)
+	}
+	if m, ok := SettledMedian(vs[:5], now); ok || m != 0 {
+		t.Fatalf("4 settled must give no median, got %d %v", m, ok)
 	}
 }
