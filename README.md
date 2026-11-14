@@ -103,6 +103,60 @@ Run `ytx schema` for the full list with every argument. Commands marked
 Global flags: `--json`, `--human`, `--fields`, `--yes`, `--dry-run`,
 `--no-cache`, `--source`, `--timeout`.
 
+## Serve mode (`ytx serve`)
+
+`ytx serve` runs the five keyless reads Power launches with as a small JSON
+service: `search`, `channel`, `playlist`, `comments` and `suggest`. It is built
+for one caller, a backend on a private network.
+
+**It has no authentication.** Run it only where nothing but your own backend can
+reach it (a private Docker network, a loopback address). Never publish its port
+to the internet. The default address is `127.0.0.1:8787` for that reason; the
+Dockerfile listens on `0.0.0.0:8787` inside the container.
+
+It never offers `video`, `transcript` or `player` reads (YouTube refuses the
+player endpoint from servers), and no write or channel call.
+
+| Request (GET) | Answer |
+| --- | --- |
+| `/v1/search?q=&limit=&order=relevance\|views\|date&type=video\|short\|any&since_days=&lang=&region=` | `{"videos":[...]}` |
+| `/v1/channel?ref=<id, @handle or URL>&limit=&shorts=true` | `{"channel":{..., "recent":[...]}}` |
+| `/v1/playlist?id=<id or URL>&limit=` | `{"playlist":{...},"videos":[...]}` |
+| `/v1/comments?video=<id or URL>&limit=&order=top\|new` | `{"comments":[...]}` |
+| `/v1/suggest?q=&lang=&region=&limit=` | `{"suggestions":[...]}` |
+| `/health` | `{"ok":true,"version":"..."}` (never calls YouTube) |
+
+Items have the same fields as the CLI's JSON (`internal/model`). Every answer adds
+`"ok":true`, `"cached"` (served from memory) and `"truncated"` (cut to the size cap).
+A failure is `{"ok":false,"error":{"code":"..."}}` with one of these codes and
+nothing from YouTube (no text, URLs or stacks; the detail goes to stderr):
+
+| Code | HTTP | Meaning |
+| --- | --- | --- |
+| `bad_request` | 400 | missing or invalid input (also 405 for a method other than GET) |
+| `not_found` | 404 | the video, channel or playlist is missing or private; also any unknown path |
+| `comments_off` | 422 | comments are turned off for that video |
+| `unavailable` | 503 / 504 | YouTube is blocked, changed, slow, or the service had a fault |
+
+Identical requests share one fetch, answers are cached in memory, failures for a
+short time too. Every limit is a flag with an env var of the same meaning (flag
+wins), defaults in `internal/serve/config.go`:
+
+| Flag | Env | Default |
+| --- | --- | --- |
+| `--addr` | `YTX_SERVE_ADDR` | `127.0.0.1:8787` |
+| `--default-results` / `--max-results` | `YTX_SERVE_DEFAULT_RESULTS` / `YTX_SERVE_MAX_RESULTS` | 20 / 50 |
+| `--max-bytes` | `YTX_SERVE_MAX_BYTES` | 1048576 |
+| `--max-query` | `YTX_SERVE_MAX_QUERY_LEN` | 200 |
+| `--request-timeout` | `YTX_SERVE_TIMEOUT` | 25s |
+| `--max-inflight` | `YTX_SERVE_MAX_INFLIGHT` | 8 |
+| `--cache-entries` | `YTX_SERVE_CACHE_ENTRIES` | 2000 |
+| `--search-ttl`, `--channel-ttl`, `--playlist-ttl`, `--comments-ttl`, `--suggest-ttl`, `--error-ttl` | `YTX_SERVE_SEARCH_TTL`, ... | 24h, 1h, 1h, 6h, 6h, 30s |
+
+A `limit` above the cap is cut to it. Panics are recovered per request and answer
+`unavailable`. The container: `docker build --build-arg VERSION=v1.2.3 -t ytx:v1.2.3 .`
+(static binary on distroless, non-root, port 8787).
+
 ## Output
 
 Output is JSON when stdout is not a terminal, or with `--json` or `YTX_JSON=1`.

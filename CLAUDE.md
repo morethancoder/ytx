@@ -12,6 +12,9 @@ and `internal/ops/list.go` first: the ops table is the single source of truth fo
   official API and falls back, the disk cache wrapper, the trace (which source answered),
   and the id/URL parsers.
 - `internal/reads`: the read commands, all through `yt.Get`.
+- `internal/serve`: `ytx serve`, the private HTTP service (five keyless reads, cache, coalescing, coded
+  errors). Not in the ops table; its Reader interface leaves out video/transcript on purpose. Its
+  limits all live in `config.go`.
 - `internal/analyze`: pure helpers (median, outlier, question detection, key terms).
 - `internal/apperr`: error codes. Return `apperr.New(code, ...)`; never invent a code
   without adding it there with an exit status.

@@ -1,0 +1,7 @@
+.git
+ytx
+dist/
+coverage.out
+.playwright/
+*.secret.json
+client_secret*.json

@@ -57,6 +57,13 @@ to leave this file out of that output.
   signal. Impressions and click-through rate are not available anywhere.
 - Keyless comments have no publish date.
 
+## Serve mode
+
+`ytx serve` is a long-running JSON service for a backend, not an agent command: it has
+no authentication, runs on a private network only, and offers just search, channel,
+playlist, comments and suggest (`GET /v1/...`, `/health`). Do not start it to answer
+a question; use the commands above. Details and limits are in the README.
+
 ## Writes
 
 These change the channel: `upload`, `edit`, `thumbnail`, `rate`, `playlist

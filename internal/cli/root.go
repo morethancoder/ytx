@@ -81,7 +81,7 @@ func NewRoot() *cobra.Command {
 	for i := range ops.All {
 		addOp(root, &ops.All[i])
 	}
-	root.AddCommand(schemaCmd())
+	root.AddCommand(schemaCmd(), serveCmd())
 	sortCommands(root)
 	return root
 }
